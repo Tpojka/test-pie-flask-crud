@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+<div class="content">
+    <h1 class="center">Task master</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Task ID</th>
+                <th>Task Content</th>
+                <th>Completed</th>
+                <th>Date Created</th>
+                <th>Actions</th>
+            </tr>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.content }}</td>
+                <td>{{ 'On' if task.completed else 'No' }}</td>
+                <td>{{ task.date_created }}</td>
+                <td>
+                    <a href="/delete/{{ task.id }}">Delete</a>
+                    <a href="/update/{{ task.id }}">Update</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </thead>
+    </table>
+
+    <form action="/" method="POST">
+{#        <input type="text" name="content" id="content">#}
+        <div class="field">
+          <label class="label">Content</label>
+          <div class="control">
+            <input class="input" type="text" placeholder="Content" name="content", id="content">
+          </div>
+        </div>
+{#        <input type="submit" value="Add Task">#}
+        <div class="field is-grouped">
+          <div class="control">
+            <button class="button is-link" type="submit">Submit</button>
+          </div>
+          <div class="control">
+            <button class="button is-link is-light">Cancel</button>
+          </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
